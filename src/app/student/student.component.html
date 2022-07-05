@@ -1,0 +1,66 @@
+<header class="p-2 bg-primary text-white">
+    <h1>Student Management System</h1>
+</header>
+<section class="container mt-3">
+    <button class="btn btn-primary " data-toggle="modal" (click)="openModal()">Add Student</button>
+    <div class="mt-2 shadow-lg rounded p-3">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Roll</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email Id</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let stud of students">
+                    <td>{{stud.roll}}</td>
+                    <td>{{stud.firstname}}</td>
+                    <td>{{stud.lastname}}</td>
+                    <td>{{stud.email}}</td>
+                    <td><button class="btn btn-sm btn-warning text-white mar" (click)="openModal(1,stud.roll)">Edit</button>
+                        <button class="btn btn-sm btn-danger" (click)="remove(stud.roll)">Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- Modal box -->
+
+<div class="modal-box d-none" #modalBox>
+    <div class="bg-white container mt-5 w-50 rounded">
+        <div class="modal-header">
+            <h3>Add Student</h3>
+        </div>
+        <form #myForm="ngForm" (submit)="onSubmit(myForm)">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Enter Roll</label>
+                    <input type="text" name="roll" class="form-control" [readOnly]="isUpdate"
+                        [(ngModel)]="student.roll">
+                </div>
+                <div class="form-group">
+                    <label>Enter First Name</label>
+                    <input type="text" name="firstname" class="form-control" [(ngModel)]="student.firstname">
+                </div>
+                <div class="form-group">
+                    <label>Enter Last Name</label>
+                    <input type="text" name="lastname" class="form-control" [(ngModel)]="student.lastname">
+                </div>
+                <div class="form-group">
+                    <label>Enter Email</label>
+                    <input type="email" name="email" class="form-control" [(ngModel)]="student.email">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="closeModal()">Close</button>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
